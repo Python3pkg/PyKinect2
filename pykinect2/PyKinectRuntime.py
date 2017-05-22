@@ -14,7 +14,7 @@ import importlib
 if sys.hexversion >= 0x03000000: 
     import _thread as thread
 else:
-    import thread 
+    import _thread 
 
 KINECT_MAX_BODY_COUNT = 6
 
@@ -52,13 +52,13 @@ class PyKinectRuntime(object):
         self._long_exposure_infrared_frame_arrived_event = 0
         self._audio_frame_arrived_event = 0
 
-        self._color_frame_lock = thread.allocate()
-        self._depth_frame_lock = thread.allocate()
-        self._body_frame_lock = thread.allocate()
-        self._body_index_frame_lock = thread.allocate()
-        self._infrared_frame_lock = thread.allocate()
-        self._long_exposure_infrared_frame_lock = thread.allocate()
-        self._audio_frame_lock = thread.allocate()
+        self._color_frame_lock = _thread.allocate()
+        self._depth_frame_lock = _thread.allocate()
+        self._body_frame_lock = _thread.allocate()
+        self._body_index_frame_lock = _thread.allocate()
+        self._infrared_frame_lock = _thread.allocate()
+        self._long_exposure_infrared_frame_lock = _thread.allocate()
+        self._audio_frame_lock = _thread.allocate()
 
         #initialize sensor
         self._sensor = ctypes.POINTER(PyKinectV2.IKinectSensor)()
@@ -153,7 +153,7 @@ class PyKinectRuntime(object):
             self._handles[self._waitHandleCount] = self._body_frame_arrived_event
             self._waitHandleCount += 1
 
-        thread.start_new_thread(self.kinect_frame_thread, ())
+        _thread.start_new_thread(self.kinect_frame_thread, ())
 
         self._last_color_frame = None
         self._last_depth_frame = None

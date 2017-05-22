@@ -12,7 +12,7 @@ import numpy as np
 if sys.hexversion >= 0x03000000:
     import _thread as thread
 else:
-    import thread
+    import _thread
 
 # colors for drawing different bodies 
 SKELETON_COLORS = [pygame.color.THECOLORS["red"],
